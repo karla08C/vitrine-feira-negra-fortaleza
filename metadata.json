@@ -1,0 +1,6 @@
+{
+  "name": "Vitrine Negra Fortaleza",
+  "description": "Vitrine digital do afroempreendedorismo e da Feira Negra de Fortaleza - Ceará. Conheça, apoie e divulgue empreendedores negros.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+:root {
+  /* Modern Warm Linen / Alabaster Background */
+  --background: 38 25% 97%;
+  --foreground: 20 14% 12%;
+
+  /* Crisp Elevated Cards */
+  --card: 0 0% 100%;
+  --card-foreground: 20 14% 12%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14% 12%;
+
+  /* Afrocentric Terracotta Primary */
+  --primary: 14 82% 51%;
+  --primary-foreground: 48 70% 99%;
+
+  /* Soft Warm Stone Neutral */
+  --secondary: 38 20% 93%;
+  --secondary-foreground: 20 14% 18%;
+
+  --muted: 38 18% 90%;
+  --muted-foreground: 20 8% 46%;
+
+  /* Golden Ochre / Ancestral Gold */
+  --gold: 42 90% 55%;
+  --gold-foreground: 20 14% 12%;
+
+  /* Deep Forest Emerald Accent */
+  --accent: 172 75% 26%;
+  --accent-foreground: 48 70% 99%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 48 70% 99%;
+
+  --border: 38 16% 88%;
+  --input: 38 16% 88%;
+  --ring: 14 82% 51%;
+
+  --font-heading: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  /* Rich Obsidian Charcoal */
+  --charcoal: 20 14% 11%;
+  --charcoal-surface: 20 14% 15%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.bg-textura {
+  background-color: hsl(var(--background));
+  background-image:
+    radial-gradient(at 15% 12%, hsl(14 82% 51% / 0.035) 0px, transparent 40%),
+    radial-gradient(at 85% 65%, hsl(42 90% 55% / 0.04) 0px, transparent 45%),
+    radial-gradient(at 50% 95%, hsl(172 75% 26% / 0.025) 0px, transparent 40%);
+}
+
+.gradient-terroso {
+  background: linear-gradient(135deg, #e04823 0%, #b83416 100%);
+}
+
+.gradient-dark {
+  background: linear-gradient(180deg, #1c1815 0%, #12100e 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, #f0ac33 0%, #c98516 100%);
+}
+
+.bg-charcoal {
+  background-color: hsl(var(--charcoal));
+}
+
+.bg-card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+}
+
+.bg-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.border-border {
+  border-color: hsl(var(--border));
+}
+
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.text-primary-foreground {
+  color: hsl(var(--primary-foreground));
+}
+
+.bg-primary {
+  background-color: hsl(var(--primary));
+}
+
+.bg-primary-foreground {
+  background-color: hsl(var(--primary-foreground));
+}
+
+.border-destructive {
+  border-color: hsl(var(--destructive));
+}
+
+.text-destructive {
+  color: hsl(var(--destructive));
+}
+
+.bg-destructive {
+  background-color: hsl(var(--destructive));
+}
+
+.text-destructive-foreground {
+  color: hsl(var(--destructive-foreground));
+}
+
+@keyframes toast-in {
+  0% { opacity: 0; transform: translateY(-12px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes toast-out {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-12px) scale(0.96); }
+}
+
+.animate-toast-out {
+  animation: toast-out 0.3s ease-in forwards;
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes scale-in {
+  0% { opacity: 0; transform: scale(0.96) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
