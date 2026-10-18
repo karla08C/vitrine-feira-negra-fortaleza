@@ -89,8 +89,8 @@ src/
 ### Passo a passo
 1. Clone o repositório:
 ```bash
-git clone https://github.com/karla08C/Vitrine--feira-negra--fortaleza.git
-cd Vitrine--feira-negra--fortaleza
+git clone https://github.com/karla08C/vitrine-feira-negra-fortaleza.git
+cd vitrine-feira-negra-fortaleza
 ```
 
 2. Instale as dependências:
@@ -113,3 +113,10 @@ npm run dev
 ```bash
 npm run build
 ```
+
+---
+
+## Demonstração ao Vivo
+
+Acesse a aplicação no ar:
+- **URL da Aplicação:** [karla08c.github.io/vitrine-feira-negra-fortaleza](https://karla08c.github.io/vitrine-feira-negra-fortaleza/)
