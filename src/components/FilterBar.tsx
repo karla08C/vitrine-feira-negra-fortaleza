@@ -20,23 +20,23 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   const categorias = ["Todas", ...CATEGORIAS];
 
   return (
-    <div className="mb-8 space-y-4">
+    <div className="mb-10 space-y-4">
       {/* Top row: Search Bar and Results Counter */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2014]/60 pointer-events-none" />
           <input
             id="search-input"
             type="text"
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
-            placeholder="Buscar por nome, categoria ou produto..."
-            className="w-full pl-11 pr-10 py-3 rounded-full bg-white border border-stone-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all text-stone-900 placeholder:text-stone-400 shadow-xs"
+            placeholder="Buscar por marca, categoria ou produto..."
+            className="w-full pl-11 pr-10 py-3 rounded-full bg-[#FAF1DE] border-2 border-[#D8C29D] focus:outline-none focus:border-[#F9910F] focus:ring-4 focus:ring-[#F9910F]/15 text-sm font-medium transition-all text-[#260E05] placeholder:text-[#3D2014]/50 shadow-sm"
           />
           {busca && (
             <button
               onClick={() => setBusca("")}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-500 transition-colors cursor-pointer"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#260E05]/10 hover:bg-[#260E05]/20 flex items-center justify-center text-[#260E05] transition-colors cursor-pointer"
               title="Limpar busca"
             >
               <X className="w-3 h-3" />
@@ -44,11 +44,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           )}
         </div>
 
-        <div className="flex items-center gap-2 self-end sm:self-center text-xs font-medium text-stone-500">
-          <SlidersHorizontal className="w-3.5 h-3.5 text-stone-400" />
+        <div className="flex items-center gap-2 self-end sm:self-center text-xs font-bold uppercase tracking-wider text-[#3D2014]/80 bg-[#FAF1DE] px-4 py-2 rounded-full border border-[#D8C29D]">
+          <SlidersHorizontal className="w-3.5 h-3.5 text-[#F9910F]" />
           <span>
-            Exibindo <strong className="text-stone-800 font-semibold">{total}</strong>{" "}
-            {total === 1 ? "negócio" : "negócios"}
+            Exibindo <strong className="text-[#260E05] font-black">{total}</strong>{" "}
+            {total === 1 ? "expositor" : "expositores"}
           </span>
         </div>
       </div>
@@ -64,13 +64,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 id="filter-category-todas"
                 key={cat}
                 onClick={() => setCategoriaAtiva(cat)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
                   isAtivo
-                    ? "bg-[#181513] text-white shadow-sm ring-2 ring-[#181513]/10"
-                    : "bg-white text-stone-700 border border-stone-200/90 hover:border-stone-300 hover:bg-stone-50/80 shadow-xs"
+                    ? "bg-[#260E05] text-[#FAF1DE] shadow-md border-2 border-[#260E05] scale-102"
+                    : "bg-[#FAF1DE] text-[#260E05] border-2 border-[#D8C29D] hover:border-[#260E05] shadow-xs"
                 }`}
               >
-                <span>Todas</span>
+                <span>✦ Todas</span>
               </button>
             );
           }
@@ -82,21 +82,16 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               id={`filter-category-${cat.toLowerCase().replace(/\s+/g, "-")}`}
               key={cat}
               onClick={() => setCategoriaAtiva(cat)}
-              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 isAtivo
-                  ? "text-white shadow-sm scale-[1.02]"
-                  : "bg-white text-stone-700 border border-stone-200/90 hover:border-stone-300 hover:bg-stone-50/80 shadow-xs"
+                  ? "bg-[#260E05] text-[#FAF1DE] border-2 border-[#260E05] shadow-md scale-102"
+                  : "bg-[#FAF1DE] text-[#260E05] border-2 border-[#D8C29D] hover:border-[#260E05] shadow-xs"
               }`}
-              style={
-                isAtivo
-                  ? { backgroundColor: cor.bg, color: cor.text }
-                  : undefined
-              }
             >
               <span
-                className="w-2 h-2 rounded-full shrink-0"
+                className="w-2.5 h-2.5 rounded-full shrink-0"
                 style={{
-                  backgroundColor: isAtivo ? "#ffffff" : cor.dotColor,
+                  backgroundColor: isAtivo ? "#F9910F" : cor.dotColor,
                 }}
               />
               <span>{cat}</span>

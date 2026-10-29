@@ -40,7 +40,17 @@
 
   --font-heading: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Alfa Slab One", "Fraunces", ui-serif, Georgia, serif;
+  --font-poster: "Alfa Slab One", cursive, serif;
+  --font-condensed: "Bebas Neue", sans-serif;
+
+  /* Reference Palette: Black History / Afro Heritage */
+  --cocoa-dark: #260E05;
+  --cocoa-frame: #36160B;
+  --parchment: #F8E4B8;
+  --parchment-light: #FAF3E7;
+  --sunburst-orange: #F9910F;
+  --amber-gold: #FAAA1E;
 
   /* Rich Obsidian Charcoal */
   --charcoal: 20 14% 11%;
@@ -49,8 +59,8 @@
 
 body {
   font-family: var(--font-body);
-  color: hsl(var(--foreground));
-  background-color: hsl(var(--background));
+  color: #260E05;
+  background-color: #FAF3E7;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -59,6 +69,35 @@ body {
 
 .font-display {
   font-family: var(--font-display);
+}
+
+.font-poster {
+  font-family: "Alfa Slab One", cursive, serif;
+  letter-spacing: -0.01em;
+}
+
+.font-condensed {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+/* Isometric Coordinate Grid from design reference */
+.bg-afro-grid {
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.45) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.45) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.bg-cocoa-grid {
+  background-image:
+    linear-gradient(45deg, rgba(249, 145, 15, 0.07) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(249, 145, 15, 0.07) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.bg-sunburst-glow {
+  background: radial-gradient(circle, rgba(249, 145, 15, 0.28) 0%, rgba(249, 145, 15, 0) 70%);
 }
 
 .bg-textura {
