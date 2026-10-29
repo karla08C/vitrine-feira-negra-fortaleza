@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/vitrine-feira-negra-fortaleza/',
+    base: process.env.VERCEL ? '/' : './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
