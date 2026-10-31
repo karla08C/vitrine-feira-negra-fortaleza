@@ -119,4 +119,4 @@ npm run build
 ## Demonstração ao Vivo
 
 Acesse a aplicação no ar:
-- **URL da Aplicação:** [karla08c.github.io/vitrine-feira-negra-fortaleza](https://karla08c.github.io/vitrine-feira-negra-fortaleza/)
+- **URL da Aplicação:** https://vitrine-feira-negra-fortaleza.vercel.app/#vitrine
