@@ -1,11 +1,28 @@
 import React from "react";
-import { MapPin, Sparkles, ShieldCheck, LogOut, ArrowDown, Store, Calendar, Compass } from "lucide-react";
+import {
+  MapPin,
+  Sparkles,
+  ShieldCheck,
+  LogOut,
+  ArrowDown,
+  Store,
+  Calendar,
+  Compass,
+  UserCheck,
+  Plus,
+  Send,
+} from "lucide-react";
 
 interface HeaderHeroProps {
   total: number;
   isAdmin: boolean;
   onLogout: () => void;
-  secaoAtiva?: "vitrine" | "sobre" | "eventos";
+  secaoAtiva?: "vitrine" | "sobre" | "eventos" | "quero-expor";
+  pendentesCount?: number;
+  onAbrirSolicitacoes?: () => void;
+  onAbrirLogin?: () => void;
+  onCadastrarNegocio?: () => void;
+  onCadastrarEvento?: () => void;
 }
 
 export const HeaderHero: React.FC<HeaderHeroProps> = ({
@@ -13,6 +30,11 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
   isAdmin,
   onLogout,
   secaoAtiva = "vitrine",
+  pendentesCount = 0,
+  onAbrirSolicitacoes,
+  onAbrirLogin,
+  onCadastrarNegocio,
+  onCadastrarEvento,
 }) => {
   return (
     <header className="relative bg-[#2A160E] py-4 sm:py-8 px-3 sm:px-6 md:px-8 text-[#FAF1DE]">
@@ -38,7 +60,7 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
           {/* Subtle distressed edge overlay / corner grunge */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-[#F3D79F]/30 pointer-events-none" />
 
-          {/* Decorative Starbursts (like in reference) */}
+          {/* Decorative Starbursts */}
           <div className="absolute top-10 right-12 text-[#F9910F] text-4xl select-none pointer-events-none animate-pulse opacity-85">
             ✦
           </div>
@@ -63,11 +85,11 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
             </div>
 
             {/* Nav Pill Tabs */}
-            <nav className="flex items-center gap-1.5 bg-[#260E05]/10 p-1 rounded-full border border-[#260E05]/15 backdrop-blur-xs">
+            <nav className="flex flex-wrap items-center justify-center gap-1.5 bg-[#260E05]/10 p-1.5 rounded-full border border-[#260E05]/15 backdrop-blur-xs">
               <a
                 id="nav-link-vitrine"
                 href="#vitrine"
-                className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   secaoAtiva === "vitrine"
                     ? "bg-[#260E05] text-white shadow-md scale-102"
                     : "text-[#260E05] hover:bg-white/50"
@@ -80,7 +102,7 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
               <a
                 id="nav-link-sobre"
                 href="#sobre"
-                className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   secaoAtiva === "sobre"
                     ? "bg-[#260E05] text-white shadow-md scale-102"
                     : "text-[#260E05] hover:bg-white/50"
@@ -93,7 +115,7 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
               <a
                 id="nav-link-eventos"
                 href="#eventos"
-                className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   secaoAtiva === "eventos"
                     ? "bg-[#260E05] text-white shadow-md scale-102"
                     : "text-[#260E05] hover:bg-white/50"
@@ -102,38 +124,64 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
                 <Calendar className="w-3.5 h-3.5 text-[#F9910F]" />
                 <span>Eventos</span>
               </a>
+
+              <a
+                id="nav-link-quero-expor"
+                href="#quero-expor"
+                className={`inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  secaoAtiva === "quero-expor"
+                    ? "bg-[#260E05] text-white shadow-md scale-102"
+                    : "text-[#260E05] hover:bg-white/50"
+                }`}
+              >
+                <Send className="w-3.5 h-3.5 text-[#F9910F]" />
+                <span>Quero Expor</span>
+              </a>
             </nav>
 
             {/* Admin Controls */}
             <div className="flex items-center gap-2">
               {isAdmin ? (
-                <div className="inline-flex items-center gap-2 bg-[#260E05] text-[#FAF1DE] px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#F9910F]" />
-                  <span>Organizador</span>
-                  <span className="opacity-30">|</span>
-                  <button
-                    id="hero-admin-logout"
-                    onClick={onLogout}
-                    className="hover:text-[#F9910F] transition-colors cursor-pointer flex items-center gap-1"
-                    title="Sair do modo administrador"
-                  >
-                    <LogOut className="w-3 h-3" />
-                    <span>Sair</span>
-                  </button>
+                <div className="flex flex-wrap items-center gap-2">
+                  {/* Candidaturas button */}
+                  {onAbrirSolicitacoes && (
+                    <button
+                      onClick={onAbrirSolicitacoes}
+                      className="relative inline-flex items-center gap-1.5 bg-[#260E05] hover:bg-[#F9910F] text-[#FAF1DE] hover:text-[#260E05] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
+                    >
+                      <UserCheck className="w-3.5 h-3.5" />
+                      <span>Candidaturas</span>
+                      {pendentesCount > 0 && (
+                        <span className="ml-1 px-1.5 py-0.2 rounded-full bg-[#F9910F] text-[#260E05] text-[10px] font-black">
+                          {pendentesCount}
+                        </span>
+                      )}
+                    </button>
+                  )}
+
+                  <div className="inline-flex items-center gap-2 bg-[#260E05] text-[#FAF1DE] px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#F9910F]" />
+                    <span className="hidden sm:inline">Admin</span>
+                    <span className="opacity-30">|</span>
+                    <button
+                      id="hero-admin-logout"
+                      onClick={onLogout}
+                      className="hover:text-[#F9910F] transition-colors cursor-pointer flex items-center gap-1"
+                      title="Sair do modo administrador"
+                    >
+                      <LogOut className="w-3 h-3" />
+                      <span>Sair</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
-                <a
-                  href="#admin-login"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const btn = document.getElementById("open-admin-login-btn");
-                    if (btn) btn.click();
-                  }}
+                <button
+                  onClick={onAbrirLogin}
                   className="inline-flex items-center gap-1.5 bg-[#260E05] hover:bg-[#F9910F] text-[#FAF1DE] hover:text-[#260E05] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Gestão</span>
-                </a>
+                  <span>Área Admin</span>
+                </button>
               )}
             </div>
           </div>
@@ -194,23 +242,68 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
                 <a
                   id="hero-explorar-btn"
                   href="#vitrine"
-                  className="inline-flex items-center justify-center gap-2.5 bg-[#260E05] hover:bg-[#F9910F] text-[#FAF1DE] hover:text-[#260E05] px-8 py-4 rounded-full font-bold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-103 active:scale-98 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 bg-[#260E05] hover:bg-[#F9910F] text-[#FAF1DE] hover:text-[#260E05] px-7 py-3.5 rounded-full font-bold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-103 active:scale-98 cursor-pointer"
                 >
                   <span>Conhecer Expositores</span>
                   <ArrowDown className="w-4 h-4" />
                 </a>
 
                 <a
+                  id="hero-quero-expor-btn"
+                  href="#quero-expor"
+                  className="inline-flex items-center justify-center gap-2.5 bg-[#F9910F] hover:bg-[#260E05] text-[#260E05] hover:text-[#FAF1DE] px-7 py-3.5 rounded-full font-bold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-103 active:scale-98 cursor-pointer"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Quero Expor na Feira</span>
+                </a>
+
+                <a
                   id="hero-eventos-btn"
                   href="#eventos"
-                  className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-[#260E05] text-[#260E05] hover:text-[#FAF1DE] border-2 border-[#260E05] px-7 py-3.5 rounded-full font-bold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-[#260E05] text-[#260E05] hover:text-[#FAF1DE] border-2 border-[#260E05] px-6 py-3.5 rounded-full font-bold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 cursor-pointer"
                 >
                   <Calendar className="w-4 h-4 text-[#F9910F]" />
                   <span>Agenda da Feira</span>
                 </a>
               </div>
 
-              {/* Empowerment Fist Element (Bottom Right) */}
+              {/* Admin quick actions if logged in */}
+              {isAdmin && (
+                <div className="flex flex-wrap items-center gap-2 p-3 bg-white/70 rounded-2xl border-2 border-[#260E05]/20 mb-6">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-[#260E05] mr-1">
+                    Painel Rápido:
+                  </span>
+                  {onCadastrarNegocio && (
+                    <button
+                      onClick={onCadastrarNegocio}
+                      className="inline-flex items-center gap-1 bg-[#260E05] text-[#FAF1DE] hover:bg-[#F9910F] hover:text-[#260E05] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" />
+                      <span>+ Expositor</span>
+                    </button>
+                  )}
+                  {onCadastrarEvento && (
+                    <button
+                      onClick={onCadastrarEvento}
+                      className="inline-flex items-center gap-1 bg-[#260E05] text-[#FAF1DE] hover:bg-[#F9910F] hover:text-[#260E05] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" />
+                      <span>+ Evento</span>
+                    </button>
+                  )}
+                  {onAbrirSolicitacoes && (
+                    <button
+                      onClick={onAbrirSolicitacoes}
+                      className="inline-flex items-center gap-1 bg-[#F9910F] text-[#260E05] hover:bg-[#260E05] hover:text-[#FAF1DE] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    >
+                      <UserCheck className="w-3 h-3" />
+                      <span>Aprovar Inscrições ({pendentesCount})</span>
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {/* Empowerment Fist Element */}
               <div className="hidden sm:flex items-center gap-3 pt-4 border-t border-[#260E05]/15">
                 <div className="w-12 h-14 shrink-0 rounded-xl overflow-hidden border-2 border-[#260E05] shadow-xs bg-[#FAF1DE]">
                   <img
@@ -232,7 +325,7 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
           </div>
         </div>
 
-        {/* Live Metrics Cards (Styled in Vintage Kraft Theme) */}
+        {/* Live Metrics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
           <div className="bg-[#FAF1DE] border-2 border-[#3D2014] p-4 rounded-2xl flex items-center gap-3.5 shadow-md">
             <div className="w-11 h-11 rounded-xl bg-[#F9910F] text-[#260E05] flex items-center justify-center font-bold">
