@@ -75,11 +75,34 @@ export function useAdminAuth() {
     []
   );
 
+  const definirNovaSenha = useCallback(
+    (novaSenha: string): { success: boolean; message: string } => {
+      const limpa = novaSenha.trim();
+      if (limpa.length < 4) {
+        return { success: false, message: "A nova senha deve ter no mínimo 4 caracteres." };
+      }
+
+      try {
+        localStorage.setItem(PASSWORD_STORAGE_KEY, limpa);
+        setCurrentPassword(limpa);
+        return { success: true, message: "Senha de administrador atualizada com sucesso!" };
+      } catch {
+        return { success: false, message: "Erro ao salvar nova senha no navegador." };
+      }
+    },
+    []
+  );
+
+  const isDefaultPassword = currentPassword === DEFAULT_PASSWORD;
+
   return {
     isAdmin,
     login,
     logout,
     alterarSenha,
+    definirNovaSenha,
+    isDefaultPassword,
+    currentPassword,
     defaultPassword: DEFAULT_PASSWORD,
   };
 }

@@ -11,6 +11,7 @@ import {
   UserCheck,
   Plus,
   Send,
+  KeyRound,
 } from "lucide-react";
 
 interface HeaderHeroProps {
@@ -23,6 +24,8 @@ interface HeaderHeroProps {
   onAbrirLogin?: () => void;
   onCadastrarNegocio?: () => void;
   onCadastrarEvento?: () => void;
+  onAbrirAlterarSenha?: () => void;
+  isDefaultPassword?: boolean;
 }
 
 export const HeaderHero: React.FC<HeaderHeroProps> = ({
@@ -35,6 +38,8 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
   onAbrirLogin,
   onCadastrarNegocio,
   onCadastrarEvento,
+  onAbrirAlterarSenha,
+  isDefaultPassword = false,
 }) => {
   return (
     <header className="relative bg-[#2A160E] py-4 sm:py-8 px-3 sm:px-6 md:px-8 text-[#FAF1DE]">
@@ -143,6 +148,20 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
             <div className="flex items-center gap-2">
               {isAdmin ? (
                 <div className="flex flex-wrap items-center gap-2">
+                  {/* Default Password Warning Badge */}
+                  {isDefaultPassword && onAbrirAlterarSenha && (
+                    <button
+                      id="hero-trocar-senha-padrao-btn"
+                      onClick={onAbrirAlterarSenha}
+                      className="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#260E05] px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition-all shadow-sm cursor-pointer animate-pulse"
+                      title="Você está usando a senha padrão (admin123). Clique para alterar."
+                    >
+                      <KeyRound className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Trocar Senha Padrão</span>
+                      <span className="sm:hidden">Senha</span>
+                    </button>
+                  )}
+
                   {/* Candidaturas button */}
                   {onAbrirSolicitacoes && (
                     <button
@@ -162,6 +181,20 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({
                   <div className="inline-flex items-center gap-2 bg-[#260E05] text-[#FAF1DE] px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md">
                     <ShieldCheck className="w-3.5 h-3.5 text-[#F9910F]" />
                     <span className="hidden sm:inline">Admin</span>
+                    {onAbrirAlterarSenha && (
+                      <>
+                        <span className="opacity-30">|</span>
+                        <button
+                          id="hero-admin-trocar-senha"
+                          onClick={onAbrirAlterarSenha}
+                          className="hover:text-[#F9910F] transition-colors cursor-pointer flex items-center gap-1 text-[11px]"
+                          title="Alterar senha do administrador"
+                        >
+                          <KeyRound className="w-3 h-3 text-[#F9910F]" />
+                          <span className="hidden sm:inline">Senha</span>
+                        </button>
+                      </>
+                    )}
                     <span className="opacity-30">|</span>
                     <button
                       id="hero-admin-logout"
