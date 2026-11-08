@@ -1,5 +1,11 @@
 # Vitrine Negra Fortaleza
 
+[![React](https://img.shields.io/badge/React-19-blue?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini_AI-8E75B2?logo=google-gemini&logoColor=white)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 Plataforma digital de divulgação, fomento comercial e valorização de afroempreendedores e negócios locais vinculados à Feira Negra de Fortaleza/CE.
 
 ---
@@ -120,3 +126,19 @@ npm run build
 
 Acesse a aplicação no ar:
 - **URL da Aplicação:** [vitrine-feira-negra-fortaleza.vercel.app](https://vitrine-feira-negra-fortaleza.vercel.app)
+
+---
+
+## Autora
+
+Desenvolvido por **Karla Castro**  
+*Gestora de Comunidade Tech & Desenvolvedora de Software*
+
+- **LinkedIn:** [linkedin.com/in/karlaj-castro](https://www.linkedin.com/in/karlaj-castro/)
+- **GitHub:** [@karla08C](https://github.com/karla08C)
+
+---
+
+## Licença
+
+Distribuído sob a licença **MIT**. Consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
